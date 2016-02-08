@@ -191,6 +191,15 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THIRD-PARTY AUTOLOAD
+ * --------------------------------------------------------------------
+ */
+
+require APPPATH . 'third_party/vendor/autoload.php';
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
@@ -199,6 +208,7 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

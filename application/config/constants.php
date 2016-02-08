@@ -36,6 +36,13 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+/*
+|--------------------------------------------------------------------------
+| USER DEFINED CONSTANTS
+|--------------------------------------------------------------------------|
+*/
+
+defined('BASE_URL') ? null : define('BASE_URL', 'http://playground.dev:'.$_SERVER['SERVER_PORT'].'/websocket/');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
