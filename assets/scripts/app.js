@@ -1,23 +1,11 @@
 var App = function() {
 
 	var initCharts = function() {
-		$('#container').highcharts({
+		var options = {
 			chart: {
-				type: 'spline',
+				type: 'bar',
 				animation: Highcharts.svg, // don't animate in old IE
-				marginRight: 10,
-				events: {
-					load: function () {
-
-						// set up the updating of the chart each second
-						/*var series = this.series[0];
-						setInterval(function () {
-							var x = (new Date()).getTime(), // current time
-								y = Math.random();
-							series.addPoint([x, y], true, true);
-						}, 1000);*/
-					}
-				}
+				marginRight: 10
 			},
 			title: {
 				text: ''
@@ -59,7 +47,8 @@ var App = function() {
 					return data;
 				}())
 			}]
-		});
+		};
+		$('#container').highcharts(options);
 	};
 
 	var updateChart = function(data) {
@@ -71,24 +60,55 @@ var App = function() {
 	};
 
 	var initResetChart = function(data) {
-		var resetBtn = $('#reset-chart');
+		var container = $('#container'),
+			resetBtn = $('#reset-chart'),
+			chart = container.highcharts(),
+			series = chart.series[0],
+			options = {
+				chart: {
+					type: 'bar',
+					animation: Highcharts.svg, // don't animate in old IE
+					marginRight: 10
+				},
+				title: {
+					text: ''
+				},
+				xAxis: {
+					type: 'integer',
+					tickPixelInterval: 150
+				},
+				tooltip: {
+					formatter: function () {
+						return '<b>' + '(' + this.x + ', ' + this.y + ')' + '</b>';
+					}
+				},
+				legend: {
+					enabled: false
+				},
+				exporting: {
+					enabled: false
+				},
+				series: [{
+					name: 'Random data',
+					data: (function () {
+						// generate an array of random data
+						var data = [];
+							data.push({
+								x: 0,
+								y: 0
+							});
+						return data;
+					}())
+				}]
+			};
 		if (resetBtn.length > 0) {
 			resetBtn.on('click', function(e){
 				e.preventDefault();
-				$('#container').highcharts({
-					series: [{
-						name: 'Random data',
-						data: (function () {
-							// generate an array of random data
-							var data = [];
-								data.push({
-									x: 0,
-									y: 0
-								});
-							return data;
-						}())
-					}]
-				});
+				console.log(chart.series);
+				if (chart.series !== undefined) {
+					series.remove(true);
+					chart = container.highcharts(options);
+				}
 			});
 		}
 	};

@@ -1,8 +1,8 @@
-<?php
+<?php 
 
 require APPPATH . "third_party/php-websocket-server/websocket_server.class.php";
 
-class Websocket extends WebSocketServer
+class Websocket_server extends WebSocketServer
 {
 	public $lastupdate = 0;
 
@@ -42,7 +42,5 @@ class Websocket extends WebSocketServer
 $host = 'localhost';
 $port = 8888;
 
-$wsServer = new myServer($host,$port);
+$wsServer = new Websocket_server($host,$port);
 $wsServer->start();
-
-?>
